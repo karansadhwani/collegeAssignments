@@ -1,0 +1,202 @@
+/*
+---------------------------------------------------------------------------------------------------------
+					PRACTICAL NO.7
+---------------------------------------------------------------------------------------------------------
+TITLE:Write C++ program to store set of negative and positive numbers using linked list. Write
+      functions to
+      a) Insert numbers
+      b) Delete nodes with negative numbers
+      c) Create two more linked lists using this list, one containing all positive numbers and
+         other containing negative numbers
+      d) For two lists that are sorted; Merge these two lists into third resultant list that is sorted
+---------------------------------------------------------------------------------------------------------
+*/
+
+#include<iostream>
+#include<iomanip>
+
+using namespace std;
+
+int total = 0;
+int node_no, i;
+
+struct node	//STRUCTURE MAIN
+{
+	int num;
+	struct node *next;
+}*head;
+
+struct node2	//STRUCTURE 2
+{
+	int num2;
+	struct node2 *next2;
+}*head2;
+
+class numbers
+{
+	public:
+		void create();			//CREATE LIST
+		void insert();			//INSERT NUMBERS
+		void display();			//DISPLAY LIST
+		void delete_negative();		//DELETE NEGATIVE
+}no;
+
+
+
+void numbers :: create()		//CREATE LIST
+{
+	cout<<"\nEnter Count of Numbers to be Inserted in the List = ";
+	cin>>node_no;
+}//Create Closed
+
+void numbers :: insert() 		//INSERT NUMBERS
+{
+	struct node *temp, *p;
+	struct node2 *temp2, *p2;
+
+	cout<<"\nAdd Numbers to The List :-\n";
+
+	for(i=0; i<node_no; i++)
+	{
+		temp = new(struct node);
+		temp2 = new(struct node2);
+
+		cout<<"Enter Number "<<i+1<<" = ";
+		cin>>temp->num;
+
+		temp2->num2 = temp->num;
+
+		temp->next = NULL;
+		temp2->next2 = NULL;
+
+		if(head == NULL)
+		{
+			head = temp;
+			p = head;
+
+			head2 = temp2;
+			p2 = head2;
+		}
+
+		else
+		{
+			p->next = temp;
+			p = p->next;
+
+			p2->next2 = temp2;
+			p2 = p2->next2;
+		}
+	}//For Closed
+}//Insert Closed
+
+void numbers :: display()		//DISPLAY LIST
+{
+	struct node *p;
+	p = head;
+
+	cout<<endl<<"Numbers in the List :- ";
+
+	while(p)
+	{
+		cout<<endl<<setw(4)<<p->num;
+		p = p->next;
+	}
+}//Display Closed
+
+void numbers :: delete_negative()	//DELETE NEGATIVE
+{
+	int key;
+	struct node2 *p2,*q2;
+	struct node *p;
+
+	p = head;
+	p2 = head2;
+
+	for(i=0; i<node_no; i++)
+	{
+		key = p->num;
+
+		if(p)
+		{
+			p = p->next;
+		}
+
+		p2 = head2;
+		q2 = head2->next2;
+
+		if(key < 0)
+		{
+			while(q2)
+			{
+				if(head2->num2 == key)
+				{
+					head2 = head2->next2;
+					break;
+				}
+
+				else
+				{
+					if(q2->num2 == key)
+					{
+						p2->next2 = q2->next2;
+						break;
+					}
+				}
+
+				p2 = p2->next2;
+				q2 = q2->next2;
+			}//While Closed
+		}//If Closed
+	}//For Closed
+
+	//TO DISPLAY
+	p2 = head2;
+
+	cout<<"\nList with Deleted Negative Numbers :-";
+
+	while(p2)
+	{
+		cout<<endl<<setw(4)<<p2->num2;
+		p2 = p2->next2;
+	}
+}//Delete Negative Closed
+
+int main()
+{
+	no.create();			//CREATE LIST
+	no.insert();			//INSERT NUMBERS
+	no.display();			//DISPLAY LIST
+	no.delete_negative();		//DELETE NEGATIVE
+
+	cout<<endl<<endl;
+
+	return 0;
+}
+
+/*----------------------------------O/P-------------------------------------
+
+student@ubuntu:~$ gedit prac7.cpp
+student@ubuntu:~$ g++ prac7.cpp -o a
+student@ubuntu:~$ ./a
+
+Enter Count of Numbers to be Inserted in the List = 4
+
+Add Numbers to The List :-
+Enter Number 1 = 2
+Enter Number 2 = -3
+Enter Number 3 = 5
+Enter Number 4 = -6
+
+Numbers in the List :-
+   2
+  -3
+   5
+  -6
+List with Deleted Negative Numbers :-
+   2
+   5
+
+student@ubuntu:~$ */
+
+
+

@@ -1,0 +1,123 @@
+/*
+Title- Create employee bio-data using foll. classes :-
+1. personal record
+2. professional record
+3. academic record
+Assume appropriate data members and member functions to accept required data and print bio-data.
+Create bio-data using multiple inheritances using c++.
+*/
+
+
+#include<iostream>
+#include<iomanip>
+using namespace std;
+
+class Per
+{
+          protected:
+                    char tel[20],dob[10],name[20], add[40];
+          public:
+                    void getper()
+                    
+                    {
+                         cout<<"Enter name : ";
+                         cin>>name;
+          
+                         cout<<"Enter address : ";
+                         cin>>add;
+              
+                         cout<<"Enter date of birth(dd/mm/yyyy) : ";
+                         cin>>dob;
+               
+                         cout<<"Enter telephone number : ";
+                         cin>>tel;
+                    }
+};
+
+class Pro
+{
+          protected:
+                    char projname[20],orgname[20],projdt[20];
+                    int sal,exp;
+         public:
+                    void getpro()
+                    {
+                              cout<<"Enter Organization name : ";
+                              cin>>orgname;
+                              
+                              cout<<"Enter Project name : ";
+                              cin>>projname;
+                    
+                              cout<<"Enter Project details : ";
+                              cin>>projdt;
+                    
+                              cout<<"Enter years of experience : ";
+                              cin>>exp;
+                    }
+};
+
+class Acd
+{
+          protected:
+                    int tmks,prcnt,py;
+                    char depart[20],clas[10];
+          public:
+                    void getacd()
+                    {
+                              cout<<"Enter department name : ";
+                              cin>>depart;
+                              
+                              cout<<"Enter total marks : ";
+                              cin>>tmks;
+                              
+                              cout<<"Enter percentage : ";
+                              cin>>prcnt;
+                              
+                              cout<<"Enter class : ";
+                              cin>>clas;
+                              
+                              cout<<"Enter passing year : ";
+                              cin>>py;
+                    }
+
+};           
+
+class Biodata:public Per,public Pro,public Acd
+{
+          public:
+                    void display();
+};
+
+
+
+
+
+
+void Biodata::display()
+{
+          cout<<setw(10)<<"*********************EMPLOYEE DETAILS***********************"<<endl;
+          cout<<setw(10)<<"............................................................"<<endl;          
+          cout<<setw(10)<<"*********************PERSONAL DETAILS***********************"<<endl;
+          cout<<setw(10)<<"Name "<<setw(15)<<"Address "<<setw(15)<<"Date of birth "<<setw(15)<<"Telephone no. "<<setw(15)<<endl;
+          cout<<setw(10)<<name<<setw(12)<<add<<setw(12)<<dob<<setw(25)<<tel<<endl;
+          cout<<setw(10)<<"............................................................."<<endl;
+          cout<<setw(10)<<"********************PROFESSIONAL DETAILS*********************"<<endl;
+          cout<<setw(10)<<"Name of Oraganization "<<setw(15)<<"Name of Project "<<setw(15)<<"Project Details "<<setw(15)<<"Salary "<<setw(15)<<"No. of years of Experience "<<endl;
+          cout<<setw(10)<<orgname<<setw(20)<<projname<<setw(17)<<projdt<<setw(17)<<sal<<setw(17)<<exp<<endl;
+          cout<<setw(10)<<"............................................................."<<endl;    
+          cout<<setw(10)<<"Department "<<setw(15)<<"Total marks "<<setw(15)<<"Percentage "<<setw(15)<<"Enter class "<<setw(15)<<"Enter passing year "<<endl;
+          cout<<setw(12)<<depart<<setw(12)<<tmks<<setw(12)<<prcnt<<setw(12)<<clas<<setw(12)<<py<<endl;
+}
+
+int main()
+{
+          Biodata b;
+          b.getper();
+          b.getpro();
+          b.getacd();
+          b.display();
+          return 0;
+          }
+
+
+

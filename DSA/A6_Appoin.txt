@@ -1,0 +1,261 @@
+/*				PRACTICAL NO. 6
+Title:Write C++ program for storing appointment schedule for day. Appointments are booked
+      randomly using linked list. Set start and end time and min and max duration for visit slot.
+      Write functions for-
+      a) Display free slots
+      b) Book appointment
+      c) Cancel appointment ( check validity, time bounds, availability etc)
+      d) Sort list based on time
+      e) Sort list based on time using pointer manipulation.
+*/
+
+
+#include<iostream>
+#include<string.h>
+using namespace std;
+
+struct Slot
+{
+    int visit;
+
+    char S_time[5];
+    char E_time[5];
+    char min_dur[5];
+    char max_dur[5];
+
+    struct Slot *next;
+
+}*head;
+
+
+class Appointment
+{
+   public:
+	Appointment()
+	{
+	    head = NULL;
+	}
+          void create_Sch();
+          void Display_Sch();
+          void book_App();
+          void cancel_App();
+          void sort_Sch();
+};
+
+
+
+//-----------------------------------------------To Create Schedule-----------------
+void Appointment :: create_Sch()
+{
+    int i,No_App;
+    struct Slot *temp, *p;
+
+    cout<<"\n\t Enter number of appointment slots: ";
+    cin>>No_App;
+
+    cout<<"\n\t Enter Appointment details: ";
+    for(i=0; i<No_App; i++)
+    {
+	temp = new(struct Slot);	//DMA
+
+	temp->visit = 0;		//Assign values
+     	cout<<"\n\t for Slot "<<i+1<<" :";
+	cout<<"\n\t Enter Start time: ";
+	cin>>temp->S_time;
+	cout<<"\n\t Enter End time: ";
+	cin>>temp->E_time;
+	cout<<"\n\t Enter Minimum Duration: ";
+	cin>>temp->min_dur;
+	cout<<"\n\t Enter Maximum Duration: ";
+	cin>>temp->max_dur;
+
+	temp->next = NULL;
+
+   	if(head == NULL)	//Attach node in Linked List
+	{
+	    head = temp;
+	       p = head;
+	}
+	else
+	{
+	   p->next = temp;
+	   p = p->next;
+	}
+    }
+
+}
+//-------------------------------------------------------------------------
+
+
+
+//--------------------------------------------To Display Schedule--------------
+void Appointment :: Display_Sch()
+{
+     int cnt = 1;
+     struct Slot *p;
+
+     cout<<"\n\t *** 1 Day Appointment Schedule ***";
+     cout<<"\n\n\t | Sr. |    |Free |    |*Start|    | *End |    |Min_Dur|    |Max_Dur|";
+
+     p = head;
+     while(p)
+     {
+	cout<<"\n\t  | "<<cnt<<".  |  ";
+	if(p->visit == 0)
+ 	   cout<<"  | Yes |  ";
+     	else
+	   cout<<"  | No* |  ";
+	cout<<"  | "<<p->S_time<<" |  ";
+	cout<<"  | "<<p->E_time<<" |  ";
+	cout<<"  |  "<<p->min_dur<<"  |  ";
+	cout<<"  |  "<<p->max_dur<<"  |  ";
+
+	p = p->next;
+	cnt++;
+     }
+}
+//-------------------------------------------------------------------------
+
+
+
+//------------------------------------------To Book an Appointment---------------------
+void Appointment :: book_App()
+{
+    int flag = 0;
+    char Min[5], Max[5];
+    struct Slot *p;
+
+    cout<<"\n\t Enter Minimum Time(Hrs) : ";
+    cin>>Min;
+
+    cout<<"\n\t Enter Maximum Time(Hrs) : ";
+    cin>>Max;
+
+    p = head;
+    while(p)
+    {
+	if(strcmp(Min , p->min_dur) == 0 && strcmp(Max , p->max_dur) == 0 && !p->visit)
+	{
+	    p->visit = 1;
+	    flag = 1;
+	    cout<<"\n\t Your Appointment is scheduled ...";
+	    cout<<"\n\t\t From : "<<p->S_time<<" To : "<<p->E_time;
+ 	    break;
+	}
+
+	p = p->next;
+    }
+    if(!flag)
+      cout<<"\n\t Slots are Busy !!!";
+
+}
+//-------------------------------------------------------------------------
+
+
+//---------------------------------------------To Cancel Appointment------------------
+void Appointment :: cancel_App()
+{
+    int flag = 0;
+    char ST[5], ET[5];
+    struct Slot *p;
+
+    cout<<"\n\t Enter Start Time : ";
+    cin>>ST;
+
+    cout<<"\n\t Enter End Time : ";
+    cin>>ET;
+
+    p = head;
+    while(p)
+    {
+	if(strcmp(ST , p->S_time) == 0 && strcmp(ET , p->E_time)== 0)
+	{
+	    p->visit = 0;
+	    flag = 1;
+	}
+
+	p = p->next;
+    }
+    if(!flag)
+      cout<<"\n\t Appointment wasn't booked !!!";
+}
+//-------------------------------------------------------------------------
+
+
+//--------------------------------------------To Sort List-----------------
+void Appointment :: sort_Sch()
+{
+    struct Slot *First, *Second;
+    int i, temp, slots = 4;
+    char ST[5],ET[5];
+
+    for(i=0; i < slots-1; i++)	//no of passes = 4-1 = 03
+    {
+       	First = head;
+	Second = head->next;
+
+	while(Second)		//No of Comparisons = 03
+	{
+	   if(strcmp(First->S_time, Second->S_time) > 0)
+	   {
+
+		temp = First->visit;		//Swap visit value
+		First->visit = Second->visit;
+		Second->visit =temp;
+
+		strcpy(ST , First->S_time);	//Swap Start time
+		strcpy(First->S_time , Second->S_time);
+		strcpy(Second->S_time , ST);
+
+		strcpy(ET , First->E_time);	//Swap End time
+		strcpy(First->E_time , Second->E_time);
+		strcpy(Second->E_time , ET);
+
+		strcpy(ST , First->min_dur);	//Swap Min-Duration
+		strcpy(First->min_dur , Second->min_dur);
+		strcpy(Second->min_dur , ST);
+
+		strcpy(ET , First->max_dur);	//Swap Max-Duration
+		strcpy(First->max_dur , Second->max_dur);
+		strcpy(Second->max_dur , ET);
+
+
+	   }
+	   First = First->next;
+	   Second = Second->next;
+	}
+    }
+}
+//-------------------------------------------------------------------------
+
+
+
+int main()
+{
+      int i;
+      Appointment A;
+
+	A.create_Sch();
+        A.Display_Sch();
+
+	cout<<"\n\n\t -- To Book 3 Appointments --";
+        for(i=0; i < 3; i++)
+      	{
+      	   A.book_App();
+	}
+	A.Display_Sch();
+
+	cout<<"\n\n\t -- To Cancel An Appointment --";
+      	A.cancel_App();
+	A.Display_Sch();
+
+	cout<<"\n\n\t -- To Sort Schedule of Appointments --";
+        A.sort_Sch();
+	A.Display_Sch();
+
+  return 0;
+}
+
+
+/*----------------------Output-----------------------------*/
+

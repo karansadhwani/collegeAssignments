@@ -1,0 +1,138 @@
+/*PRACTICAL.NO.13-WRITE C++ PROGRAM TO STORE FIRST YEAR PERCENTAGE OF STUDENT IN ARRAY. WRITE FUNCATION FOR SORTING ARRAY OF FLOATING POINT NUMBERS IN ASCENDING ORDER USING 
+1.SELECTION SORT
+2.BUBBLE SORT AND DISPALY TOP FIVE SCORES 
+3. INSETION SORT
+4.SHELL SORT AND DISPLAY TOP FIVE SCORES
+ Implementation of sorting techniques*/
+#include<iostream>
+using namespace std;
+float n[10],sorted[10],temp;
+int i,j,increment;
+void bubble()
+{
+	for(i=0;i<5;i++)
+	{
+		for(j=0;j<5-i-1;j++)
+		{
+			if(sorted[j]>sorted[j+1])
+			{
+				temp=sorted[j];
+				sorted[j]=sorted[j+1];
+				sorted[j+1]=temp;
+			}
+		}
+	}
+}
+void selection()
+{
+	for(i=0;i<5;i++)
+	{
+		for(j=i+1;j<5;j++)
+		{
+			if(sorted[i]>sorted[j])
+			{
+				temp=sorted[j];
+				sorted[j]=sorted[i];
+				sorted[i]=temp;
+			}
+		}
+	}
+}
+void insertion()
+{
+    for (i=0;i<5;i++)
+    {
+	for (j=i;j>=1;j--)
+        {
+            if (sorted[j] < sorted[j-1])
+            {
+		temp = sorted[j];
+                sorted[j] = sorted[j-1];
+                sorted[j-1] = temp;
+            }
+            else
+                break;
+        }
+    }
+}
+
+int main()
+{
+	char ch,s;
+	cout<<"Enter the percentage of students: ";
+	for(i=0;i<5;i++)
+	{
+		cin>>n[i];
+	}
+	cout<<"Percentage without sorting: ";
+	for(i=0;i<5;i++)
+	{
+		cout<<n[i]<<"\n";
+	}
+	for(i=0;i<5;i++)
+	{
+		sorted[i]=n[i];
+	}
+	do
+	{
+		cout<<"1.Bubble sort\n2.Selection sort\n3.Insertion sort";
+		cout<<"\n Enter your choice:-\t";
+		cin>>ch;
+		switch(ch)
+		{
+			case '1':
+				bubble();
+				cout<<"Sorted Percentage are using Bubble sort:\t ";
+				for(i=0;i<5;i++)
+				{
+					cout<<sorted[i]<<"\n";
+				}
+			break;
+			case '2':
+				selection();
+				cout<<"Sorted Percentage are using section sort:\t ";
+				for(i=0;i<5;i++)
+				{
+					cout<<sorted[i]<<"\n";
+				}
+			break;
+			case '3':
+				insertion();
+				cout<<"Sorted Percentage are using Insertion sort:\t ";
+				for(i=0;i<5;i++)
+				{
+					cout<<sorted[i]<<"\n";
+				}
+
+			default:
+				cout<<" Wrong choice!! Enter correct Y or N:-\t";
+                }
+		cout<<"\n Do you want to calculate more?? Y or N:-\t";
+		cin>>s;
+        }while(s=='Y');
+	return 0;
+}
+/*______________________OUTPUT___________________
+student@ubuntu:~$ g++ cs.cpp -o a
+student@ubuntu:~$ ./a
+Enter the percentage of students: 45
+56
+78
+21
+4
+Percentage without sorting: 45
+56
+78
+21
+4
+1.Bubble sort
+2.Selection sort
+3.Insertion sort
+ Enter your choice:-	2
+Sorted Percentage are using section sort:	 4
+21
+45
+56
+78
+*/
+

@@ -1,0 +1,86 @@
+/*
+Name- Abhishesk Chikhalkar
+Roll NO.- 10
+Title- Create User defined exception to check the following conditions and throw the exception if the
+criterion does not meet.
+a. User has age between 18 and 55
+b. User stays has income between Rs. 50,000 – Rs. 1,00,000 per month
+c. User stays in Pune/ Mumbai/ Bangalore / Chennai
+d. User has 4-wheeler
+Accept age, Income, City, Vehicle from the user and check for the conditions mentioned
+above. If any of the condition not met then throw the exception. 
+*/
+
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+
+int main()
+{
+	int age,income,car;
+	char city[20];
+	cout<<"Enter the age of the user: ";
+	cin>>age;
+	try{
+			if(age<18 || age>55)
+			{
+				throw age;
+			}
+			else
+			{
+				cout<<"\nAge is : "<<age;
+			}
+	   }catch(int)
+	   	{
+	   			cout<<"\nAge is not between 18-55";
+        }
+        
+       cout<<"\nEnter the income of user: ";
+       cin>>income; 
+         try{
+         		if(income<50000 || income>100000)
+         		{
+         			throw income;
+         		}
+         		else
+         		{
+         			cout<<"\nIncome is: "<<income;
+         		}
+         	}catch(int)
+         	{
+         		cout<<"\nIncome is not between Rs.50,000 - Rs.1,00000: "; 
+         	}
+         	
+       cout<<"\nEnter the city of the user: ";
+       cin>>city;
+       try{
+       			if(strcmp(city,"Pune") && strcmp(city,"Mumbai") && strcmp(city,"Mangalore") && strcmp(city,"Chennai"))
+       			{
+       				throw city;
+       			}
+       			else
+       			{
+       				cout<<"\nCity is: "<<city;
+       			}
+          }catch(char[])
+          {
+          		cout<<"\nCity is not among Pune,Mumbai,Mangalore or Chennai: ";
+          }
+      cout<<"\nEnter the type of car: ";
+      cin>>car;
+      try{
+       			if(car==2 || car==3)
+       			{
+       				throw car;
+       			}
+       			else
+       			{
+       				cout<<"\nCar is: "<<car<<endl;
+       			}
+      	 }catch(int)
+      	 {
+      	 		cout<<"Car is not 4 wheeler"<<endl;
+      	 }
+      	 return 0;
+}

@@ -1,0 +1,153 @@
+/*
+Title- Create a dtabase of student information system containing the following information system :- name , rno, class, div, dob, bgrp, contact add, tele ph no , driving license no.Construct the database with suitable member functions for initializing and destroying the data i.e. constructor(default , copy) , destructor , static member funtions, friend class, this pointer, inline code, and dynamic memory allocation operators (new & delete)  
+*/ 
+
+
+#include<iostream>
+using namespace std;
+
+class stud
+{
+	int rno;
+	char dlno[20],name[20],div[20],std[10],bgrp[20], add[20], dob[20];
+	
+	public:
+                    stud();
+                    stud(name[], roll[], dv[], sd[],bgp[], dlnum[], adds[], db[]);
+                    stud(data &d);
+                    friend class data;
+                    static int count;
+                    
+                    ~stud()
+                    {
+                              cout<<"**Destructor is called**"<<endl;
+                    }
+
+};
+
+
+stud::stud()
+{
+          strcpy(name,"Rohan");
+          strcpy(std,"Computer");
+          strcpy(div,"SE");
+          strcpy(add,"Datrak fatta Nashik");
+          rno=32;
+          dob=03/07/1998;
+          strcpy(brgp,"b+");
+          strcpy(dlno,"201700032");
+}  
+
+stud::stud(int roll,char db[] char nam[], char sd[], char dv[], char bgp[], char adds[], char dlnum[])
+{
+          strcpy(this->name,nam);
+          this->rno,roll;
+          strcpy(this->std,sd);
+          strcpy(this->div,dv);
+          this->dob,dat;
+          strcpy(this->brgp,bgp);
+          strcpy(this->add,adds);
+          strcpy(this->dlno,dlnum);
+}
+
+//do prgming for copy constructor//
+//and do coding in int main for calling default,parameterized,copy constructor//
+
+class data
+{
+          public:
+                    void get();
+                    void show();
+};
+void data::get()
+
+{
+	cout<<"Name of the student :";
+	cin>>name;
+	
+	cout<<"Roll no. is :";
+	cin>>rno;
+	
+	cout<<"Branch is :";
+	cin>>std;
+	
+	cout<<"Division is :";
+	cin>>div;
+	
+	cout<<"Enter date :";
+	cin>>date;
+	
+	cout<<"Enter month :";
+	cin>>month;
+	
+	cout<<"Enter year :";
+	cin>>year;
+	
+	cout<<"Blood grp is :";
+	cin>>bgrp;
+	
+	cout<<"Address is :";
+	cin>>add;
+	
+	cout<<"Driving license no. is :";
+	cin>>dlno;
+	
+
+}
+void data::show()
+{
+	cout<<"Name of the student :"<<name<<endl;
+	cout<<"Roll no. of the student :"<<rno<<endl;
+	cout<<"Branch :"<<std<<endl;
+	cout<<"Division is :"<<div<<endl;
+	cout<<"Date of Birth :"<<date<<"-"<<month<<"-"<<year<<endl;
+	cout<<"Blood group is :"<<bgrp<<endl;
+	cout<<"Address is :"<<add<<endl;
+	cout<<"License no. is :"<<dlno<<endl;
+          cout<<"\n";
+
+         
+
+
+
+}
+
+
+int main()
+{
+          stud s;
+          data *d;
+          
+          
+	
+	int i,n,count;
+
+
+	cout<<"Enter no. of students :";
+	cin>>n;
+	
+
+	d=new data[n];
+	
+	for(i=0;i<n;i++)
+	{
+		d[i].get();
+	}
+	
+	cout<<"\n";
+	
+	for(i=0;i<n;i++)
+	{
+		d[i].show();
+	}
+	
+	
+	return 0;
+	
+}
+	
+	
+	
+	
+	
+

@@ -1,0 +1,155 @@
+
+
+
+
+/* 			PRACTICAL NO:12
+Search from list using binary search (recursive and non recursive).
+*/
+
+
+
+#include<iostream>
+#include<iomanip>
+using namespace std;
+
+
+class Search
+{
+  private:
+
+	int a[100],key,i,size,high,mid;
+  public:
+
+  // RECURSIVE BINARY SEARCH FUNCTION
+	int Rec_binSearch( int a[], int first, int last, int key)
+	{
+	        int middle = (first + last) / 2;
+	 
+	        if ( key == a[middle] )
+	        {
+		    cout << "The key has been found at Position: "<<middle+1;
+	            return middle;
+	        }
+	        else if ( key < a[middle] )
+	        {	            
+	            return Rec_binSearch( a, first, middle-1, key);
+	        }
+	         
+	        else if ( key > a[middle] )
+	        {
+	            return Rec_binSearch( a, middle+1, last, key);	            
+	        }
+	         
+	    return -1;
+	}
+   
+	
+   
+
+   void binSearch(int a[],int size)
+   {
+        int key,i,high,mid,low,flag=0;
+
+	
+	cout<<"\n Enter the search key:-\t";
+	cin>>key;
+	
+	low = 0;
+	high = size-1;
+	while(low <= high)
+	{
+		mid=(low+high)/2;
+		if(key == a[mid])
+		{
+			cout<<"\n\t *** Element is found at position: "<<mid+1;
+			flag = 1;
+			break;
+		}
+		else
+		{
+			if(key > a[mid])
+			{
+				low = mid+1;
+			}
+			else
+			{
+				high = mid-1;
+			}
+		}
+	  }
+	  if(flag == 0)
+	  cout<<"\n\t *** Element Not Found !!!";
+    }
+};
+
+
+
+int main()
+{
+	int ch,pos,i;
+	char ans;
+	Search b;
+
+  	const int size = 5;
+	int arr[size] = { 1, 2, 3, 4, 5};
+	int key = 0;
+
+        cout<<"\n Elements are:-\t";
+	for(i=0;i<size;i++)
+	{
+		cout<<"  "<<arr[i];
+	}
+
+	do
+   	{
+     	  cout<<"\n 1. Recursive binary search";
+     	  cout<<"\n 2. Non-recursive binary search ";
+
+	  cout<<"\n Enter your choice:-\t";
+	  cin>>ch;
+	  switch(ch)
+	  {
+		case 1:	cout<<"\n Enter the search key:-\t";
+			cin>>key;
+		
+	        	pos = b.Rec_binSearch( arr, 0, size,key);	            		  
+		        break;
+
+		case 2: b.binSearch(arr,size);
+			break;
+			
+	  }
+	  cout<<"\n Do u want to continue?(y/n)";
+      	  cin>>ans;
+   	}while(ans=='y');
+	
+    return 0;
+}
+
+/*-------Output--------------------
+student@ubuntu:~$ g++ binarysearch.cpp -o a
+student@ubuntu:~$ ./a
+
+ Elements are:-	  1  2  3  4  5
+
+ 1. Recursive binary search
+ 2. Non-recursive binary search 
+ Enter your choice:-	1
+
+ Enter the search key:-	3
+The key has been found at Position: 3
+
+ Do u want to continue?(y/n)y
+
+ 1. Recursive binary search
+ 2. Non-recursive binary search 
+ Enter your choice:-	2
+
+ Enter the search key:-	5
+
+	 *** Element is found at position: 5
+
+ Do u want to continue?(y/n)n
+student@ubuntu:~$ 
+*/
+

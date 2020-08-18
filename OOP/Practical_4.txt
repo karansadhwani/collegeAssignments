@@ -1,0 +1,158 @@
+/*
+Title-Implement a class Complex which represents the Complex Number data type. Implement the
+following operations:
+1. Constructor (including a default constructor which creates the complex number 0+0i).
+2. Overloaded operator+ to add two complex numbers.
+3. Overloaded operator* to multiply two complex numbers.
+4. Overloaded << and >> to print and read Complex Numbers. 
+*/
+
+
+#include<iostream>
+#include<iomanip>
+using namespace std;
+class complex
+{
+       
+          public:
+                    int real,imag;
+                    complex()
+                    {
+                              real=0;
+                              imag=0;
+                    }
+                    complex operator+(complex);
+                    complex operator*(complex);
+                    complex operator-(complex);
+                    complex operator/(complex);
+                    friend ostream& operator<<(ostream&, complex&);
+                    friend istream& operator<<(istream&, complex&);
+
+};
+
+
+complex complex ::operator+(complex obj)
+{
+          complex temp;
+          temp.real=real+obj.real;
+          temp.imag=imag+obj.imag;          
+          return temp;
+}
+
+
+complex complex ::operator-(complex obj)
+{
+          complex temp;
+          temp.real=real-obj.real;
+          temp.imag=imag-obj.imag;          
+          return temp;
+}
+
+
+complex complex ::operator*(complex obj)
+{
+          complex temp;
+          temp.real=real*obj.real-imag*obj.imag;          
+          temp.imag=real*obj.imag+imag*obj.real;
+          return temp;
+}
+
+
+complex complex ::operator/(complex obj)
+{
+          complex temp;
+          temp.real=(real*obj.real-imag*obj.imag)/(obj.real*obj.real)+(obj.imag*obj.imag);          
+          temp.imag=(real*obj.imag+imag*obj.real)/(obj.real*obj.real)+(obj.imag*obj.imag);
+          return temp;
+}
+      
+
+istream & operator>>(istream& in, complex & obj)
+{
+          in >> obj.real;
+          in >> obj.imag;
+
+}
+          
+
+ostream & operator<<(ostream& out, complex & obj)                             
+{
+          out << obj.real;
+          out <<"+"<< obj.imag << "i"<< endl;
+          return out;
+}    
+
+
+int main()
+{
+          int s;
+          complex a,b,add,subt,mult,div;
+          do
+          {
+                    cout<<"Enter the real and imaginary number for complex no. 1 :"<<endl;
+                    cin>>a;
+                    cout<<"Enter the real and imaginary number for complex no. 2 :"<<endl;          
+                    cin>>b;
+                    cout<<"Enter your choice :"<<endl;
+                    cout<<"1. Addition"<<endl;
+                    cout<<"2. Subtraction"<<endl;
+                    cout<<"3. Multiplication"<<endl;
+                    cout<<"4. Division"<<endl;
+                    cin>>s;
+                  
+                    switch(s)
+                    {
+                            case 1:
+                                      add=a+b;
+                                      cout<<"Addition is"<<add<<endl;
+                                      break;
+                                      
+                            case 2:
+                                      subt=a-b;
+                                      cout<<"Subtraction is"<<add<<endl;
+                                      break;
+                            case 3:
+                                      mult=a*b;                             
+                                      cout<<"Multiplication is"<<mult<<endl;
+                                      break;
+                            
+                            case 4:
+                                      div=a/b;
+                                      cout<<"Division is"<<add<<endl;
+                                      break;          
+                            
+                            default:
+                                      cout<<setw(10)<<"Wrong option selected"<<endl;
+                                      cout<<setw(10)<<"Select from given choices"<<endl;
+                     }         
+                     cout<<"If you want to continue press 1"<<endl;
+                     cin>>s;                
+                    
+             }while(s==1);        
+             return 0;
+}                                    
+                  
+       
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

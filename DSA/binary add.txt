@@ -1,0 +1,328 @@
+/* 
+                     Assignment No.7
+
+wrire a c++ program for storing binary no. using doubly linked list . write functions
+a)to compute 1's and 2's complement
+b)add two binary no.
+--------------------------------------*/
+
+#include<iostream>
+using namespace std;
+class node
+{
+	public:
+	int num;
+	node*next, *prev;
+};
+
+class linkedlist
+{
+	
+	
+	public:
+	node*head, *tail;
+	void create();
+	void display();
+	void compliment();
+	void twoscompliment();
+	linkedlist add(linkedlist);
+	linkedlist()
+	{
+		head=NULL;
+	}
+};
+
+void linkedlist::create()
+{
+	node *temp, *curr;
+	int i=0;
+	cout<<"Enter 8 bit binary number(0 or 1)";
+	do
+	{
+		curr=new node;
+		
+		cin>>curr -> num;
+		curr->next=curr->prev=NULL;
+		if(head==NULL)
+		{
+			temp=head=curr; 
+		}
+		else
+		{
+			temp->next=curr;
+			curr->prev=temp;
+			temp=curr;
+		}
+		i++;
+	
+	}while(i<8);
+	tail=curr;
+}
+
+void linkedlist::display()
+{
+	
+	node *curr;
+	curr=head;
+	if(head==NULL)
+	cout<<"head is empty ";
+	
+	else
+	{
+		while(curr!=NULL)
+		{
+			cout<<" "<<curr -> num;
+			curr=curr -> next;
+		}	
+	}
+}
+
+void linkedlist::compliment()
+{
+	node *temp, *curr;
+	curr=head;
+	while(curr!=NULL)
+	{
+		if(curr->num==0)
+		{
+			curr->num=1;
+		}
+		else
+		curr->num=0;
+		curr=curr->next;
+	}
+}
+
+void linkedlist::twoscompliment()
+{
+	node *curr;
+	curr=tail;
+	int d=curr->num;
+	int c;
+	c=1;
+	
+	while(curr!=head)
+	{
+          		d=curr->num;
+		d=d+c;
+		if(d==1)
+		{
+			c=0;
+			curr->num=d;
+			break;
+		}
+		if(d==2)
+		{
+			c=1;
+			curr->num=0;
+		}
+		curr=curr->prev;
+	}
+}
+
+linkedlist linkedlist::add(linkedlist l2)
+{
+	
+	node *temp, *curr, *t1, *temp1;
+	linkedlist l3;
+	curr=head;
+	temp=l2.head;
+	int c=0, d=0, e=0, m=0;
+	while(curr->next!=NULL)
+	curr=curr->next;
+	while(temp->next!=NULL)
+	temp=temp->next;
+	while(curr!=NULL)
+	{
+		t1=new node;
+		t1->next=t1->prev=NULL;
+		
+		d=curr->num;
+		e=temp->num;
+		m=d+e+c;
+		
+		if(m==0)
+		{
+			c=0;
+			t1->num=0;
+		}
+		else
+			if(m==1)
+			{
+				c=0;
+				t1->num=1;	
+			}
+			else
+				if(m==2)
+				{
+					c=1;
+					t1->num=0;
+				}
+				else
+				{
+					c=1;
+					t1->num=1;
+				}
+				curr=curr->prev;
+                temp=temp->prev;
+                // creating 3 rd list 
+                if (l3.head==NULL)
+                {
+                     l3.head=t1;
+                     t1->next=NULL;
+                     
+                     temp1= t1;
+                }
+                else
+                {
+                     t1->next=temp1;
+                     temp1->prev=t1;
+                     temp1=t1;
+                }
+	
+	}
+	l3.head=temp1;
+	return l3;
+		
+
+}
+
+int main()
+{
+	int ch;
+	char o;
+	linkedlist l1, l2, l3;
+	l1.create();
+	l2.create();
+	cout<<"\nnumber 1 is ";
+	l1.display();
+	cout<<"\nnumber 2 is";
+	l2.display();
+	
+	do
+	{
+		cout<<"\nenter choice : ";
+		cout<<"\n1. one's compliment \n2. twos compliment \n3. add\n";
+		cin>>ch;
+	
+		switch(ch)
+		{
+	
+		case 1: cout<<"which number to be complimented ? \n a. LL 1 \t b. LL 2";
+				cin>>o;
+				switch(o)
+				{
+					case 'a':	l1.compliment();
+								cout<<"ones compliment is "<<endl;
+								l1.display();
+								cout<<"\n";
+								break;
+					case 'b':	l2.compliment();
+								cout<<"ones compliment is "<<endl;
+								l2.display();
+								cout<<"\n";
+								break;
+				}
+		break;	
+		case 2: cout<<"which number to be complimented ? \n a. LL 1 \t b. LL 2";
+				cin>>o;
+				switch(o)
+				{
+					case 'a':	l1.twoscompliment();
+								cout<<"twos compliment is "<<endl;
+								l1.display();
+								cout<<"\n";
+								break;
+					case 'b':	l2.twoscompliment();
+								cout<<"twos compliment is "<<endl;
+								l2.display();
+								cout<<"\n";
+								break;
+				}
+		break;
+		case 3: l3=l1.add(l2);
+			cout<<"addition is";
+			l3.display();
+			break;
+		}
+	
+	}while(ch<4);
+	return 0;
+}
+
+/*-----------------------OUTPUT-------------------------------------------------
+
+student@L1LAB-Desktop:~$ gedit assignment_7.cpp
+student@L1LAB-Desktop:~$ g++ assignment_7.cpp -o a
+student@L1LAB-Desktop:~$ ./a
+Enter 8 bit binary number(0 or 1)1       
+1
+0
+1
+0
+0
+1
+0
+Enter 8 bit binary number(0 or 1)0
+1
+0 
+1 
+0
+1
+1
+0
+
+number 1 is  1 1 0 1 0 0 1 0
+number 2 is 0 1 0 1 0 1 1 0
+enter choice : 
+1. one's compliment 
+2. twos compliment 
+3. add
+1
+which number to be complimented ? 
+ a. LL 1 	 b. LL 2a
+ones compliment is 
+ 0 0 1 0 1 1 0 1
+
+enter choice : 
+1. one's compliment 
+2. twos compliment 
+3. add
+2
+which number to be complimented ? 
+ a. LL 1 	 b. LL 2a
+twos compliment is 
+ 0 0 1 0 1 1 1 0
+
+enter choice : 
+1. one's compliment 
+2. twos compliment 
+3. add
+3
+addition is 1 0 0 0 0 1 0 0
+enter choice : 
+1. one's compliment 
+2. twos compliment 
+3. add
+1
+which number to be complimented ? 
+ a. LL 1 	 b. LL 2b
+ones compliment is 
+ 1 0 1 0 1 0 0 1
+
+enter choice : 
+1. one's compliment 
+2. twos compliment 
+3. add
+2
+which number to be complimented ? 
+ a. LL 1 	 b. LL 2b
+twos compliment is 
+ 1 0 1 0 1 0 1 0
+
+enter choice : 
+1. one's compliment 
+2. twos compliment 
+3. add
+
+/*--------------*/

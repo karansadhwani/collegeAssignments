@@ -1,0 +1,82 @@
+/*
+                    Assignment No.14
+
+write c++ program to store first year percentage of students in array. write functuon for sorting array of floating point no in ascending order using quick sort and diplay top 5 score.
+---------------------------------------*/
+
+
+#include <iostream>
+using namespace std;
+
+void quicksort(float [5],float,float);
+
+int main()
+{
+  float array[5];
+  cout<<"\n Entet the student percentage:-\n";
+  for(int i=0;i<5;i++)
+	{
+		cin>>array[i];
+	}
+  int i,elementsize = 5,any;
+  quicksort(array,0,elementsize-1);
+  cout<<"\n Top 5 score Sorted order are:\n ";
+  for(i=elementsize-1;i>=0;i--)
+    	cout<<array[i]<<"\n";
+  	cout<<"\nPress Any Key to Exit";
+  	cin>>any;
+  return 0;
+}
+
+void quicksort(float x[5],float first,float last)
+{   int pivot, j, temp, i;
+
+if(first<last){
+         pivot=first;
+         i=first;
+         j=last;
+
+
+         while(i<j){
+             while(x[i]<=x[pivot]&&i<last)
+                 i++;
+             while(x[j]>x[pivot])
+                 j--;
+             if(i<j){
+                 temp=x[i];
+                  x[i]=x[j];
+                  x[j]=temp;
+             }
+         }
+
+         temp=x[pivot];
+         x[pivot]=x[j];
+         x[j]=temp;
+         quicksort(x,first,j-1);
+         quicksort(x,j+1,last);
+    }
+}
+
+/*------------------OUTPUT------------------
+student@L1LAB-Desktop:~$ gedit assignment_14.cpp
+student@L1LAB-Desktop:~$ g++ assignment_14.cpp -o a
+student@L1LAB-Desktop:~$ ./a
+
+ Entet the student percentage:-
+95.2
+65.3
+78.5
+85.7
+92.8
+
+ Top 5 score Sorted order are:
+95.2
+92.3
+85.5
+78.7
+65.8
+
+Press Any Key to Exitl
+student@L1LAB-Desktop:~$
+
+--------------------------------------------------------------------------------------------------*/

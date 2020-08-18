@@ -1,0 +1,46 @@
+/*
+Title- Write C++ program using STL for implementation of stack queue using SLL 
+
+*/
+
+#include<iostream>
+#include<stack>
+using namespace std;
+
+
+int main()
+{
+	int choice,ele,i;
+	char ans;
+	stack<int>s;
+	do{
+			cout<<"1.Push \n2.Pop \n3.Size \n4.Display"<<endl;
+			cout<<"Enter your choice: "<<endl;
+			cin>>choice;
+			switch(choice)
+			{
+				case 1: cout<<"Enter the element to be pushed: "<<endl;
+						cin>>ele;
+						s.push(ele);
+						break;
+			 	case 2: ele=s.top();
+			 			s.pop();
+			 			cout<<"Poped element is: "<<ele<<endl;
+			 			break;
+			 	case 3: cout<<"Size of stack is: "<<s.size()<<endl;
+						break;
+				case 4: cout<<"Elements in stack are as follows: "<<endl;
+					   	while(!s.empty())
+					   	{
+					   		cout<<" "<<s.top()<<endl;
+					   		s.pop();
+					   	}
+					   	break;
+			   default: cout<<"Incorrect choice!!!";
+					    break;		 			
+			 					
+			}
+		cout<<"Do you want to perform other operation? "<<endl;
+		cin>>ans; 
+	  }while(ans == 'y' || ans == 'Y');
+}

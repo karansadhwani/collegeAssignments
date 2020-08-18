@@ -1,0 +1,56 @@
+/*
+Title- Write a C++ program that creates an output file, writes information to it, closes the file and
+open it again as an input file and read the information from the file.
+*/
+
+#include<iostream>
+#include<fstream>
+
+using namespace std;
+
+class employee
+{
+          char name[20];
+          int id;
+          float salary;
+          char dept[10];
+          
+          public:
+                    void accept()
+                    {
+                              cout<<"Enter the name :";
+                              cin>>name;
+                              
+                              cout<<"Enter your id :";
+                              cin>>id;
+                              
+                              cout<<"Enter your salary :";
+                              cin>>salary;
+                              
+                              cout<<"Enter your department :";
+                              cin>>dept;
+                   }
+                   
+                   void display()
+                   {
+                             cout<<"Employee information is :";
+                             cout<<"\n"<<name<<"\n"<<id<<"\n"<<salary<<"\n"<<dept<<"\n";
+                   }                    
+};
+
+                             
+int main()
+{
+          employee e;
+          
+          fstream file;
+          
+          file.open("sample",ios::in|ios::out);
+          
+          e.accept();
+          file.write((char*)&e,sizeof(e));
+          file.read((char*)&e,sizeof(e));
+          e.display();
+ 
+          return 0;
+}

@@ -1,0 +1,324 @@
+/*
+--------------------------------------------------------------------------------------------------------------
+TITLE:Department of Computer Engineering has student's club named 'Pinnacle Club'. Students of
+Second, third and final year of department can be granted membership on request. Similarly
+one may cancel the membership of club. First node is reserved for president of club and last
+node is reserved for secretary of club. 
+Write C++ program to maintain club member‘s information using singly linked list. 
+Store student PRN and Name. 
+Write functions to :-
+a) Add and delete the members as well as president or even secretary.
+b) Compute total number of members of club
+c) Display members
+d) Display list in reverse order using recursion
+e) Two linked lists exists for two divisions. Concatenate two lists.
+---------------------------------------------------------------------------------------------------------
+*/
+
+#include<iostream>
+#include<string.h>
+
+using namespace std;
+
+int total = 0;
+int node_no, i;
+
+struct revlist
+{
+	int prn;
+	char name[15];
+}s[50];
+
+struct node
+{
+	int prn;
+	char name[15];
+	struct node *next;
+}*head;
+
+class linkedlist
+{
+	public:
+		void create();
+		void add();
+		void display();
+		void reverse();
+		void deletenode();
+}l;
+
+int main()
+{
+	int choice, flag;
+
+	do
+	{
+		cout<<"\n1.Create List\n2.Add Members\n3.Display List\n4.Reverse List Display";
+		cout<<"\n5.Delete Members\n6.Exit\nEnter Choice = ";
+		cin>>choice;
+
+		flag = 0;
+
+		if(choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5 && choice !=6)
+		{
+			flag = 1;
+			cout<<"\nInvalid Choice.Select Again.";
+		}
+
+		if(flag == 0)
+		{
+			if(choice != 6)
+			{
+				switch(choice)
+				{
+					case 1:
+						l.create();
+						break;
+
+					case 2:
+						l.add();
+						break;
+
+					case 3:
+						l.display();
+						break;
+
+					case 4:
+						l.reverse();
+						break;
+
+					case 5:
+						l.deletenode();
+						break;
+				}
+			}
+		}
+	}while(choice != 6);
+
+	cout<<endl;
+
+	return 0;
+}
+
+void linkedlist::create()
+{
+	cout<<"Enter Total Number of Members = ";
+	cin>>node_no;
+}
+
+void linkedlist::add()
+{
+	struct node *temp, *p;	
+
+	cout<<"\nAdd Members to The List :-\n";
+
+	for(i=0; i<node_no; i++)
+	{
+		temp = new(struct node);
+		
+		cout<<"Enter Student PRN = ";
+		cin>>temp->prn;
+
+		cout<<"Enter Student Name = ";
+		cin>>temp->name;
+
+		temp->next = NULL;
+
+		if(head == NULL)
+		{
+			head = temp;
+			p = head;
+		}
+
+		else
+		{
+			p->next = temp;
+			p = p->next;
+		}
+	}//For closed
+}
+
+void linkedlist::display()
+{
+	struct node *p;
+	p = head;
+
+	cout<<endl;	
+	
+	total = 0;
+	i = 0;	
+
+	while(p)
+	{
+		s[i].prn = p->prn;
+		strcpy(s[i].name, p->name);
+		i++;
+		
+		cout<<p->prn<<"\t"<<p->name<<endl;
+		p = p->next;
+		total++;
+	}
+	
+	cout<<"\nTotal Number of Members = "<<total<<endl;
+}
+
+void linkedlist::reverse()
+{
+	int Z;
+	Z = node_no - 1;
+	
+	cout<<"\nList in Reverse Order :- ";
+	for(i=Z; i>=0; i--)
+	{
+		cout<<endl<<s[i].prn<<"\t"<<s[i].name;
+	}
+	
+	cout<<endl;
+}
+
+void linkedlist::deletenode()
+{
+	int key;
+	struct node *p,*q;
+	
+	cout<<"\nEnter the prn to delete:";
+	cin>>key;
+		
+	p=head;
+	q=head->next;		
+
+	while(q)
+	{
+		if(head->prn == key)
+		{
+			head=head->next;
+			break;
+		}
+		
+		else
+		{
+			if(q->prn == key)
+			{
+				p->next=q->next;
+				break;
+			}
+		}
+	
+		p=p->next;
+		q=q->next;
+	}//While Closed
+}
+
+/*
+----------------------------------------------------------------------------------------------------------
+                                        OUTPUT
+----------------------------------------------------------------------------------------------------------
+student@ubuntu:~$ g++ A5.cpp -o a
+student@ubuntu:~$ ./a
+
+1.Create List
+2.Add Members
+3.Display List
+4.Reverse List Display
+5.Delete Members
+6.Exit
+Enter Choice = 1
+Enter Total Number of Members = 2
+
+1.Create List
+2.Add Members
+3.Display List
+4.Reverse List Display
+5.Delete Members
+6.Exit
+Enter Choice = ^Z
+[1]+  Stopped                 ./a
+student@ubuntu:~$ clear
+student@ubuntu:~$ g++ A5.cpp -o a
+student@ubuntu:~$ ./a
+
+1.Create List
+2.Add Members
+3.Display List
+4.Reverse List Display
+5.Delete Members
+6.Exit
+Enter Choice = 1
+Enter Total Number of Members = 3
+
+1.Create List
+2.Add Members
+3.Display List
+4.Reverse List Display
+5.Delete Members
+6.Exit
+Enter Choice = 2
+
+Add Members to The List :-
+Enter Student PRN = 1
+Enter Student Name = a
+Enter Student PRN = 2
+Enter Student Name = b
+Enter Student PRN = 3
+Enter Student Name = c
+
+1.Create List
+2.Add Members
+3.Display List
+4.Reverse List Display
+5.Delete Members
+6.Exit
+Enter Choice = 3
+
+1	a
+2	b
+3	c
+
+Total Number of Members = 3
+
+1.Create List
+2.Add Members
+3.Display List
+4.Reverse List Display
+5.Delete Members
+6.Exit
+Enter Choice = 4
+
+List in Reverse Order :- 
+3	c
+2	b
+1	a
+
+1.Create List
+2.Add Members
+3.Display List
+4.Reverse List Display
+5.Delete Members
+6.Exit
+Enter Choice = 5
+
+Enter the prn to delete:2
+
+1.Create List
+2.Add Members
+3.Display List
+4.Reverse List Display
+5.Delete Members
+6.Exit
+Enter Choice = 3
+
+1	a
+3	c
+
+Total Number of Members = 2
+
+1.Create List
+2.Add Members
+3.Display List
+4.Reverse List Display
+5.Delete Members
+6.Exit
+Enter Choice = 6
+
+student@ubuntu:~$ 
+----------------------------------------------------------------------------------------------------------
+*/

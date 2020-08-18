@@ -1,0 +1,90 @@
+/*
+Title- Write C++ program using STL for Dqueue (Double ended queue)
+*/
+
+
+#include<iostream>
+#include<deque>
+#include<iterator>
+using namespace std;
+
+int main()
+{
+	deque<int> q;
+	deque<int>::iterator q1;
+	int ch;
+	char y;
+	do 
+	{
+		cout<<"Menu for Queue";
+		cout<<"\n1:Enter element at rear\n2:Enter element at end\n3:remove element form rear\n4.remove element form end\n5:display element\n4.size of dqueue\n";
+		cout<<"entet choice";
+		cin>>ch;
+		switch(ch)
+		{
+			case 1:
+					int no;
+					cout<<"\nEnter the no to added into dqueue rear:\n";
+					cin>>no;
+					q.push_front(no);
+					cout<<no<<"element is added\n";
+			break;
+
+			
+			case 2:
+					int no1;
+					cout<<"\nEnter the no to added into dqueue end:\n";
+					cin>>no1;
+					q.push_back(no1);
+					cout<<no<<"element is added\n";
+			break;
+	
+			case 3:
+					if(q.empty())
+					{
+						cout<<"queue is empty\n";
+					}	
+					else
+					{
+						cout<<"element is deleted from dqueue at rear position\t"<<q.front();
+						q.pop_fornt();
+					}
+			break;
+			
+			case 4:
+					if(q.empty())
+					{
+						cout<<"queue is empty\n";
+					}	
+					else
+					{
+						cout<<"element is deleted from dqueue at end position\t"<<q.end();
+						q.pop_back();
+					}
+			break;
+						
+
+			case 5:
+				/*	if(!q.empty())
+					{
+						for(int i=q.begin();i!=q.end();i++)
+						{
+							cout<<" "<<*q1;	
+							q.pop();
+						}
+					}*/
+			break;
+	
+			case 6:
+					if(q.empty())
+						cout<<"queue is empty";
+					else
+						cout<<"size of queue is"<<q.size()<<"\n";
+			break;
+		}
+		cout<<"\ndo you what to continue\n";
+		cin>>y;
+	}while(y=='Y' || y=='y');
+cout<<"\n";
+return 0;
+}

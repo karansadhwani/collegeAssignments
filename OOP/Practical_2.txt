@@ -1,0 +1,58 @@
+/*
+Title- Write a C++ program create a calculator for an arithmetic operator (+, -, *, /). The program
+should take two operands from user and performs the operation on those two operands
+depending upon the operator entered by user. Use a switch statement to select the operation.
+Finally, display the result. 
+*/
+
+#include<iostream>
+using namespace std;
+int main()
+{
+	int a,b,result;
+	char choice;
+	cout<<"Enter two integers: "<<endl;
+	cin>>a>>b;
+	do{
+		cout<<"OPERATIONS"<<endl;
+		cout<<"1.Addition \n2.Subtraction \n3.Multiplication \n4.Divison"<<endl;
+		cout<<"Which operation you want to perform? ";
+		cin>>choice;
+		switch(choice)
+		{
+			case '+': if(choice == '+')
+	            	{	
+			    		result=a+b;
+			    		cout<<"Addition is "<<result<<endl;
+			    	}
+			    	break;
+			case '-': if(choice == '-')
+					{
+						result=a-b;
+						cout<<"Subtraction is "<<result<<endl;
+					}
+					break;
+	    	case '*': if(choice == '*')
+	    			{
+	    				result=a*b;
+	    				cout<<"Multiplication is "<<result<<endl;
+	    			}
+	    			break;
+			case '/': if(choice == '/')
+					{
+					   if(b>0)
+					   {
+							result=a/b;
+							cout<<"Division is "<<result<<endl;
+            	       }
+            	       else
+            	       cout<<"Division is not possible!"<<endl;				
+					}
+					break;
+			default: cout<<"Incorrect input!!!"<<endl;
+				 	 break;
+		}
+	cout<<"Do you want to perform other operation? "<<endl;
+	cin>>choice;
+	}while(choice == 'y' || choice == 'Y');
+}

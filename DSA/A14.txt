@@ -1,0 +1,81 @@
+/*
+			PRACTICAL NO:14
+Write C++ program to store first year percentage of students in array. Sort array of floating
+point numbers in ascending order using quick sort and display top five scores.*/
+
+
+
+
+
+
+
+#include <iostream>
+using namespace std;
+
+void quicksort(float [5],float,float);
+
+int main()
+{
+  float array[5];
+  cout<<"\n Entet the student percentage:-\n";
+  for(int i=0;i<5;i++)
+	{
+		cin>>array[i];
+	}
+  int i,elementsize = 5,any;
+  quicksort(array,0,elementsize-1);
+  cout<<"\n Sorted elements are:\n ";
+  for(i=0;i<elementsize;i++)
+    	cout<<array[i]<<"\n";
+  	cout<<"\nPress Any Key to Exit";
+  	cin>>any;
+  return 0;
+}
+
+void quicksort(float x[5],float first,float last)
+{   int pivot, j, temp, i;
+
+if(first<last){
+         pivot=first;
+         i=first;
+         j=last;
+
+
+         while(i<j){
+             while(x[i]<=x[pivot]&&i<last)
+                 i++;
+             while(x[j]>x[pivot])
+                 j--;
+             if(i<j){
+                 temp=x[i];
+                  x[i]=x[j];
+                  x[j]=temp;
+             }
+         }
+
+         temp=x[pivot];
+         x[pivot]=x[j];
+         x[j]=temp;
+         quicksort(x,first,j-1);
+         quicksort(x,j+1,last);
+    }
+}
+/*
+ Entet the student percentage:-
+67
+98
+97
+46
+63
+
+ Sorted elements are:
+ 46
+63
+67
+97
+98
+
+Press Any Key to Exit4
+
+Process returned 0 (0x0)   execution time : 16.177 s
+Press any key to continue.*/

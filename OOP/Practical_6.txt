@@ -1,0 +1,113 @@
+/*
+Title- Imagine a publishing company which does marketing for book and audiocassette versions.
+Create a class publication that stores the title (a string) and price (type float) of a publication.
+From this class derive two classes: book, which adds a page count (type int), and tape, which
+adds a playing time in minutes (type float).
+Write a program that instantiates the book and tape classes, allows user to enter data and
+displays the data members. If an exception is caught, replace all the data member values with
+zero values.
+*/
+
+
+#include <iostream>
+using namespace std;
+
+class publication
+{
+          public:
+                    char title[20];
+                    float price;
+                    virtual void read()
+                    {
+                              cout<<"ENTER THE TITLE OF BOOK\n";
+                              cin>>title;
+                              
+                              cout<<"ENTER THE PRICE OF BOOK\n";
+                              cin>>price;
+                    } 
+                    virtual void show()
+                    {
+                              cout<<"THE TITLE OF BOOK IS:"<<title;
+                              cout<<"\nTHE PRICE OF BOOK IS: "<<price<<"Rs"<<endl;
+                              cout<<"\n";
+                    }
+};
+
+
+class book: public publication
+{
+          public:
+                    int page_count;
+                    
+                    void read()
+                    {
+                              cout<<"ENTER THE NO. OF PAGES:";
+                              cin>>page_count;
+                    }
+                    
+                    void show()
+                    {
+                              cout<<"THIS BOOK CONTAIN "<<page_count<<" NO. OF PAGES"<<endl;
+                              cout<<"\n";
+                    }
+};
+
+
+class tape:public publication
+{
+          public:
+                    float time;
+                    void read()
+                    {
+                              cout<<"ENTER THE PLAYING TIME:\n";
+                              cin>>time;
+                    }
+                    void show()
+                    {
+                              cout<<"THE PLAYING TIME IS:"<<time<<" min"<<endl;
+                    }
+
+};
+
+
+int main()
+{
+        publication *p;
+        publication m;
+        
+        book t;
+        tape l;
+        m.read();
+        m.show();
+        
+        p=&t;
+        p->read();
+        p->show();
+        
+        p=&l;
+        p->read();
+        p->show();
+        
+        cout<<"\n";
+
+    return 0;
+}
+
+
+
+/*ENTER THE TITLE OF BOOK
+rohan
+ENTER THE PRICE OF BOOK
+2000
+THE TITLE OF BOOK IS:rohan
+THE PRICE OF BOOK IS: 2000Rs
+
+ENTER THE NO. OF PAGES:200
+THIS BOOK CONTAIN 200 NO. OF PAGES
+
+ENTER THE PLAYING TIME:
+15
+THE PLAYING TIME IS:15 min
+*/
+
+ 

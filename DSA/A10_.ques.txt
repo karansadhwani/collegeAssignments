@@ -1,0 +1,232 @@
+/*
+				PRACTICAL NO:10
+Queues are frequently used in computer programming, and a typical example is the creation
+of a job queue by an operating system. If the operating system does not use priorities, then
+the jobs are processed in the order they enter the system. 
+
+Write C++ program for simulating job queue. Write functions to add job and delete job from queue.
+*/
+
+
+
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+
+int size = 5;
+
+class Queue		//Class for Queue Data and Operations
+{
+     int que[5];
+     int rear,front;
+  public:
+     Queue()
+     {
+         rear = 0;
+         front = 0;
+     }
+     
+     void insert(int x)		//Definations Inside Class
+     {
+         if(rear >= size)		//Queue Full
+         {
+             cout<<"\n\n_ _ _ Queue over flow";
+             return;
+         }
+
+         que[rear] = x;
+	 rear++;
+         cout<<"\n\t Inserted : "<<x;
+
+     }		//End of Insert() Function
+
+
+     void del()
+     {
+         if(front == rear)	//Queue Empty
+         {
+              cout<<"\n\n _ _ _ Queue under flow";
+              return;
+         }
+         
+         cout<<"\n\t Deleted: "<<que[front];
+	 front++;
+
+     }		//End of Delete() Function
+
+
+     void display()
+     {
+ 	int i;
+
+         if(rear == front)
+         {
+             cout <<"\n\t _ _ _ Queue Empty !!!";
+             return;
+         }
+	 
+	 cout<<"\n\n\t Job Queue : ";
+         for(i = front; i < rear; i++)
+         {
+             cout<<que[i]<<" ";
+         }
+      }		//End of Display() Function
+
+
+};		//End of Class
+ 
+
+
+int main()
+{
+      int ch,val;
+      Queue q;
+
+      while(1)
+      {
+            cout<<"\n\n\t *Menu \n1.insert  2.delet  3.display  4.exit\nEnter ur choice: ";
+            cin>>ch;
+
+            switch(ch)
+            {
+                  case 1: cout<<"\n\t Enter the element: ";
+                          cin>>val;
+
+                          q.insert(val);
+                          break;
+
+                  case 2: q.del(); 
+			  break;
+
+                  case 3: q.display();
+			  break;
+
+                  case 4: exit(0);
+
+            }
+       }
+
+       return (0);
+
+}
+
+
+/*------------Output------------------------
+student@ubuntu:~$ g++ Pr_10.cpp -o a
+student@ubuntu:~$ ./a
+
+
+	 *Menu 
+1.insert  2.delet  3.display  4.exit
+Enter ur choice: 1
+
+	 Enter the element: 10
+
+	 Inserted : 10
+
+	 *Menu 
+1.insert  2.delet  3.display  4.exit
+Enter ur choice: 1
+
+	 Enter the element: 20
+
+	 Inserted : 20
+
+	 *Menu 
+1.insert  2.delet  3.display  4.exit
+Enter ur choice: 1
+
+	 Enter the element: 30
+
+	 Inserted : 30
+
+	 *Menu 
+1.insert  2.delet  3.display  4.exit
+Enter ur choice: 1
+
+	 Enter the element: 40
+
+	 Inserted : 40
+
+	 *Menu 
+1.insert  2.delet  3.display  4.exit
+Enter ur choice: 1
+
+	 Enter the element: 50
+
+	 Inserted : 50
+
+	 *Menu 
+1.insert  2.delet  3.display  4.exit
+Enter ur choice: 1
+
+	 Enter the element: 60
+
+
+_ _ _ Queue over flow
+
+	 *Menu 
+1.insert  2.delet  3.display  4.exit
+Enter ur choice: 3
+
+
+	 Job Queue : 10 20 30 40 50 
+
+	 *Menu 
+1.insert  2.delet  3.display  4.exit
+Enter ur choice: 2
+
+	 Deleted: 10
+
+	 *Menu 
+1.insert  2.delet  3.display  4.exit
+Enter ur choice: 2
+
+	 Deleted: 20
+
+	 *Menu 
+1.insert  2.delet  3.display  4.exit
+Enter ur choice: 3
+
+
+	 Job Queue : 30 40 50 
+
+	 *Menu 
+1.insert  2.delet  3.display  4.exit
+Enter ur choice: 2
+
+	 Deleted: 30
+
+	 *Menu 
+1.insert  2.delet  3.display  4.exit
+Enter ur choice: 2
+
+	 Deleted: 40
+
+	 *Menu 
+1.insert  2.delet  3.display  4.exit
+Enter ur choice: 2
+
+	 Deleted: 50
+
+	 *Menu 
+1.insert  2.delet  3.display  4.exit
+Enter ur choice: 2
+
+
+ _ _ _ Queue under flow
+
+	 *Menu 
+1.insert  2.delet  3.display  4.exit
+Enter ur choice: 3
+
+	 _ _ _ Queue Empty !!!
+
+	 *Menu 
+1.insert  2.delet  3.display  4.exit
+Enter ur choice: 4
+
+student@ubuntu:~$ 
+
+*/
+
